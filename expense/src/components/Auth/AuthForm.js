@@ -19,45 +19,42 @@ const AuthForm = () => {
     const enteredMail = emailInput.current.value;
     const enteredPassword = passwordInput.current.value;
     setisLoading(true);
-        if (isLogin) {
-        try {
-          const response = await fetch(
-            "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAxQBeHpqU9pVy3f5hSwrxeCwgwLlTdXY8",
-            {
-              method: "POST",
-              body: JSON.stringify({
-                email: enteredMail,
-                password: enteredPassword,
-                returnSecureToken: true,
-              }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          setisLoading(false);
-
-          if (!response.ok) {
-            let errMsg = "Authentication Failed";
-            throw new Error(errMsg);
+    if (isLogin) {
+      try {
+        const response = await fetch(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAxQBeHpqU9pVy3f5hSwrxeCwgwLlTdXY8",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              email: enteredMail,
+              password: enteredPassword,
+              returnSecureToken: true,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-          const data = await response.json();
-          authctx.logIn(data.idToken);
-          Navigate("/et");
-        }
-    catch(err) {
-        alert(err.message);
-    }
-}
+        );
+        setisLoading(false);
 
-         else {
-            const enteredConfirmPassword = confirmpasswordInput.current.value;
-            if (enteredPassword !== enteredConfirmPassword) {
-                alert("Password does not match with confirm password");
-                setisLoading(false);
-              } else {
-          try {
-            const res = await fetch(
+        if (!response.ok) {
+          let errMsg = "Authentication Failed";
+          throw new Error(errMsg);
+        }
+        const data = await response.json();
+        authctx.logIn(data.idToken);
+        Navigate("/et");
+      } catch (err) {
+        alert(err.message);
+      }
+    } else {
+      const enteredConfirmPassword = confirmpasswordInput.current.value;
+      if (enteredPassword !== enteredConfirmPassword) {
+        alert("Password does not match with confirm password");
+        setisLoading(false);
+      } else {
+        try {
+          const res = await fetch(
             "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAxQBeHpqU9pVy3f5hSwrxeCwgwLlTdXY8",
             {
               method: "POST",
@@ -79,14 +76,14 @@ const AuthForm = () => {
           }
           const data = await res.json();
           console.log("User has successfully signed up");
-
-        }catch (error) {
-            alert(error.message);
-          }
-    } 
-}
-    
-}
+          alert('Account Created successfully')
+          setIsLogin(true)
+        } catch (error) {
+          alert(error.message);
+        }
+      }
+    }
+  };
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -145,6 +142,5 @@ const AuthForm = () => {
     </section>
   );
 };
-
 
 export default AuthForm;

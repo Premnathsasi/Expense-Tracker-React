@@ -1,0 +1,7 @@
+.editProfile {
+    display: flex;
+    justify-content: center;
+    margin: 5rem auto;
+    width: 95%;
+    max-width: 40rem;
+}

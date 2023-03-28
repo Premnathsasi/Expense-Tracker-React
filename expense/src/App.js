@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import "./App.css";
 import { Routes, Route} from "react-router-dom";
 import AuthForm from "./components/Auth/AuthForm";
-import ExpenseTracker from "./components/ExpenseTracker";
+import Welcome from "./components/Welcome";
 import AuthContext from "./components/Store/AuthContext";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
   return (
     <React.Fragment>
       <Routes>
-      {authCtx.isLoggedIn && <Route path="/et" element={<ExpenseTracker />} />}
+      {authCtx.isLoggedIn && <Route path="/et" element={<Welcome />} />}
       <Route path="/" element={<AuthForm />} />
       </Routes>
      

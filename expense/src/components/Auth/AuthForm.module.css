@@ -3,7 +3,7 @@
     width: 95%;
     max-width: 20rem;
     border-radius: 6px;
-    background-color: #04435e;
+    background-color: #453C67;
     box-shadow: 0 5px 18px 15px rgba(0, 0, 0, 0.2);
     padding: 1rem;
     color: #fff;
@@ -47,8 +47,8 @@
     cursor: pointer;
     font: inherit;
     color: white;
-    background-color: #022b3d;
-    border: 1px solid #022b3d;
+    background-color: #453C67;
+    border: 1px solid #453C67;
     border-radius: 4px;
     padding: 0.5rem 2.5rem;
     box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.2);
@@ -56,8 +56,8 @@
   }
   
   .actions button:hover {
-    background-color: #04435e;
-    border-color: #04435e;
+    background-color: #5a5763;
+    border-color: #5a5763;
   }
   
   .actions .toggle {
