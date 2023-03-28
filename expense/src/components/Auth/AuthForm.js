@@ -16,32 +16,39 @@ const submitHandler = async(e) => {
     const enteredPassword = passwordInput.current.value;
     const enteredConfirmPassword = confirmpasswordInput.current.value;
     setisLoading(true)
-    try {
-        const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAxQBeHpqU9pVy3f5hSwrxeCwgwLlTdXY8",
-        {
-            method: "POST",
-            body: JSON.stringify({
-                email:enteredMail,
-                password: enteredPassword,
-                returnSecureToken: true,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-              },
-        })
+    if (enteredPassword !== enteredConfirmPassword) {
+         alert('Password does not match with confirm password')
         setisLoading(false)
-
-        if (!response.ok) {
-            let errMsg = 'Authentication Failed';
-                throw new Error(errMsg)
+        
+    }else {
+        try {
+            const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAxQBeHpqU9pVy3f5hSwrxeCwgwLlTdXY8",
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    email:enteredMail,
+                    password: enteredPassword,
+                    returnSecureToken: true,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                  },
+            })
+            setisLoading(false)
+    
+            if (!response.ok) {
+                let errMsg = 'Authentication Failed';
+                    throw new Error(errMsg)
+            }
+            const data = await response.json();
+            console.log('User has successfully signed up')
+    
+        } catch(error) {
+            alert(error.message)
         }
-        const data = await response.json();
-        console.log('User has successfully signed up')
-
-    } catch(error) {
-        alert(error.message)
+    
     }
-
+   
 }
 
   return (
