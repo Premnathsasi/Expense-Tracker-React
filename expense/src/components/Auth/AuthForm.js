@@ -43,7 +43,7 @@ const AuthForm = () => {
         }
         const data = await response.json();
         authctx.logIn(data.idToken);
-        Navigate("/et");
+        Navigate("/welcome");
       } catch (err) {
         alert(err.message);
       }
@@ -83,6 +83,10 @@ const AuthForm = () => {
         }
       }
     }
+    emailInput.current.value= "";
+    passwordInput.current.value= "";
+
+
   };
 
   const switchAuthModeHandler = () => {
@@ -130,6 +134,7 @@ const AuthForm = () => {
             <button>{isLogin ? "Login" : "Create Account"}</button>
           )}
           {isLoading && <Spinner />}
+          <br/>
           <button
             type="button"
             className={classes.toggle}
