@@ -1,7 +1,7 @@
 import React, { useRef, useState, useContext } from "react";
 import classes from "./AuthForm.module.css";
 import Spinner from "../UI/Spinner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import AuthContext from "../Store/AuthContext";
 
 const AuthForm = () => {
@@ -129,6 +129,7 @@ const AuthForm = () => {
             ></input>
           </div>
         )}
+        {isLogin && <div><NavLink  className="text-white" to="/forgot">Forgot Password ?</NavLink></div>}
         <div className={classes.actions}>
           {!isLoading && (
             <button>{isLogin ? "Login" : "Create Account"}</button>
