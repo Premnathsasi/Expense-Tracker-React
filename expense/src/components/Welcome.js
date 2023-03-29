@@ -39,12 +39,20 @@ const Welcome = () => {
     }
   };
 
+  const logoutHandler = () => {
+    authCtx.logOut();
+    Navigate('/')
+  };
+
   return (
     <React.Fragment>
       <div className="bg-dark text-white d-flex justify-content-between align-items-center">
         <span className="h1 ms-3">Welcome to Expense Tracker!!!</span>
-        <span className="me-3">
+        <span>
           <Button variant="success" onClick={emailVerifyHandler}>Verify Email</Button>
+        </span>
+        <span className="me-3">
+          <Button onClick={logoutHandler}>Logout</Button>
         </span>
       </div>
       {!editProfile && (
