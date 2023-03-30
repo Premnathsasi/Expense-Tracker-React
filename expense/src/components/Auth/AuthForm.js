@@ -95,41 +95,45 @@ const AuthForm = () => {
 
   return (
     <section className={classes.auth}>
+      <div className={classes.main}>
+    
       <h2>{isLogin ? "Login" : "Sign Up"}</h2>
       <form onSubmit={submitHandler}>
         <div className={classes.control}>
-          <label htmlFor="email">Your Email:</label>
+          {/* <label htmlFor="email">Your Email</label> */}
           <input
             type="email"
             id="email"
             required
-            placeholder="Email"
             ref={emailInput}
+            placeholder="Email"
           ></input>
         </div>
         <div className={classes.control}>
-          <label htmlFor="password">Password:</label>
+          {/* <label htmlFor="password">Password</label> */}
           <input
             type="password"
             id="password"
             required
-            placeholder="password"
             ref={passwordInput}
+            placeholder="Password"
           ></input>
         </div>
         {!isLogin && (
           <div className={classes.control}>
-            <label htmlFor="confirmpassword">Confirm Password</label>
+            {/* <label htmlFor="confirmpassword">Confirm Password</label> */}
             <input
               type="password"
               id="confirmpassword"
               required
-              placeholder="confirm password"
               ref={confirmpasswordInput}
+              placeholder="Confirm Password"
             ></input>
           </div>
         )}
-        {isLogin && <div><NavLink  className="text-white" to="/forgot">Forgot Password ?</NavLink></div>}
+        <div className={classes.control}>
+        {isLogin && <div><NavLink  className="text-dark" to="/forgot">Forgot Password ?</NavLink></div>}
+          </div>
         <div className={classes.actions}>
           {!isLoading && (
             <button>{isLogin ? "Login" : "Create Account"}</button>
@@ -141,10 +145,11 @@ const AuthForm = () => {
             className={classes.toggle}
             onClick={switchAuthModeHandler}
           >
-            {isLogin ? "Create new account" : "Login with existing account"}
+            {isLogin ? "Create new account" : "Already have an account! Login"}
           </button>
         </div>
       </form>
+      </div>
     </section>
   );
 };

@@ -35,7 +35,6 @@ const submitHandler= async(e) => {
     e.preventDefault();
     const enteredName = nameInput.current.value;
     const enteredPhtoUrl = photoInput.current.value;
-    console.log(authCtx.token)
 
     try {
         const res = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAxQBeHpqU9pVy3f5hSwrxeCwgwLlTdXY8",

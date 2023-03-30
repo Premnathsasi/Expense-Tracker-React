@@ -1,0 +1,9 @@
+.item {
+    padding: 10px 0;
+    display: flex;
+  }
+  
+  .item span {
+    flex-basis: 33%;
+    text-align: center;
+  }

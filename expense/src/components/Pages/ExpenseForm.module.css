@@ -1,0 +1,73 @@
+.form {
+    background-color: azure;
+    width: 500px;
+    margin: auto;
+    border: 2px solid black;
+    box-shadow: 0 0 10px black;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    padding: 30px;
+    font-weight: bold;
+  }
+  
+  .type,
+  .amount,
+  .description {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .type select,
+  .amount input,
+  .description textarea {
+    width: 65%;
+    box-sizing: border-box;
+    padding: 5px 5px 5px 5px;
+  }
+  
+  .type label,
+  .amount label,
+  .description label {
+    width: 35%;
+  }
+  
+  .description textarea {
+    height: 80px;
+  }
+  
+  .button {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+
+  
+  .items {
+    background-color: azure;
+    width: 600px;
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+    box-sizing: border-box;
+    padding: 20px 10px 20px 0;
+  }
+  
+  .items .title {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+    text-decoration: underline;
+  }
+  
+  .title span {
+    flex-basis: 33%;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
