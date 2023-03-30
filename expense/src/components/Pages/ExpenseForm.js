@@ -17,7 +17,7 @@ const ExpenseForm = () => {
   const addExpenseHandler = async (event) => {
     event.preventDefault();
     try {
-      const updatedList = {
+      let updatedList = {
         amount: amountRef.current.value,
         type: typeRef.current.value,
         description: descriptionRef.current.value,
@@ -39,7 +39,10 @@ const ExpenseForm = () => {
       const data = await response.json();
       if (response.ok) {
         console.log("Added successfully");
-        setExpenseList((prev) => [...prev, updatedList]);
+        setExpenseList((prev) => [...prev, {id:data.name, ...updatedList}]);
+        amountRef.current.value = "";
+        typeRef.current.value= "";
+        descriptionRef.current.value = "";
       } else {
         let errMsg = "Adding Expenses Failed";
         throw new Error(errMsg);
@@ -63,9 +66,10 @@ const ExpenseForm = () => {
 
         const newList = [];
         for (const key in data) {
-          newList.push(data[key]);
+          newList.push({id: key,...data[key]});
         }
         setExpenseList(newList);
+        console.log(newList)
       } catch (err) {
         console.log(err.message);
       }
@@ -73,12 +77,32 @@ const ExpenseForm = () => {
     getList();
   }, [cleanEmail]);
 
+  const edit = (item) => {
+    setExpenseList((preState) => {
+      const updatedItemList = preState.filter((data) => data.id !== item.id);
+      return updatedItemList;
+    });
+
+    amountRef.current.value = item.amount;
+    typeRef.current.value = item.type;
+    descriptionRef.current.value = item.description;
+  };
+
+  // deleting the expense
+  const deleted = (id) => {
+    setExpenseList((preState) => {
+      const updatedItemList = preState.filter((data) => data.id !== id);
+      return updatedItemList;
+    });
+    };
+
   const goToWelcomeHandler = () => {
     Navigate("/welcome");
   };
+  
 
   const newExpenseList = expenseList.map((item) => (
-    <ExpenseItem item={item} key={Math.random().toString()} />
+    <ExpenseItem item={item} key={item.id } edit={edit} deleted={deleted}/>
   ));
 
   return (

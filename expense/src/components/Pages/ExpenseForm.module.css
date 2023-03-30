@@ -48,7 +48,7 @@
   
   .items {
     background-color: #C8DBBE;
-    width: 600px;
+    width: 700px;
     margin: auto;
     border-radius: 12px;
     box-shadow: 5px 10px 20px #000;
@@ -58,14 +58,13 @@
   
   .items .title {
     display: flex;
-    align-items: center;
     text-align: center;
     margin-bottom: 20px;
     text-decoration: underline;
   }
   
   .title span {
-    flex-basis: 33%;
+    flex-basis: 27%;
     font-size: 18px;
     font-weight: bold;
   }
