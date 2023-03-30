@@ -14,12 +14,12 @@ function App() {
   return (
     <React.Fragment>
       <Routes>
-        <Route path="/" element={<AuthForm />} />
+        {!authCtx.isLoggedIn && <Route path="/" element={<AuthForm />} />}
         {authCtx.isLoggedIn && <Route path="/welcome" element={<Welcome />} />}
         {authCtx.isLoggedIn && <Route path="/profile" element={<Profile />} />}
         {authCtx.isLoggedIn && <Route path="/expense" element={<ExpenseForm />} />}
         <Route path="/forgot" element={<ForgotPasswordPage/>} />
-        <Route path='*' element={<Navigate to="/" />}/>
+        {!authCtx.isLoggedIn ? <Route path='*' element={<Navigate to="/" />}/> : <Route path='*' element={<Navigate to="/welcome" />}/> }
       </Routes>
     </React.Fragment>
   );

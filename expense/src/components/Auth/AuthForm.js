@@ -43,6 +43,7 @@ const AuthForm = () => {
         }
         const data = await response.json();
         authctx.logIn(data.idToken);
+        localStorage.setItem("email", JSON.stringify(data.email))
         Navigate("/welcome");
       } catch (err) {
         alert(err.message);

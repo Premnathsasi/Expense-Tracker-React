@@ -13,11 +13,11 @@ background-size: cover;
 .btn {
   color: #fff;
   height: 4rem;
-  background-color: #004E64;
+  background-color: #1c4550;
   border-color: #004E64;
   font-weight: bold;
   letter-spacing: 0.25em;
-  border-radius: 0px;
+  border-radius: 5px;
 }
 
 .btn:hover,
