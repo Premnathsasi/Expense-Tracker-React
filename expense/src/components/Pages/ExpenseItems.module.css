@@ -6,4 +6,6 @@
   .item span {
     flex-basis: 33%;
     text-align: center;
+    color: white;
+    font-family: 'Alkatra', cursive;
   }

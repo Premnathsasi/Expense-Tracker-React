@@ -1,16 +1,28 @@
 .form {
-    background-color: #86A3B8;
+  /* background-image: linear-gradient(to top, #383a74 0%, #585e92 12%, #65689f 25%, #7474b0 37%, #7e7ebb 50%, #8389c7 62%, #9795d4 75%, #a2a1dc 87%, #5c5388 100%);   */
     width: 500px;
     margin: auto;
     box-sizing: border-box;
     border-radius: 20px;
-    margin-top: 100px;
+    margin-top: 70px;
     margin-bottom: 50px;
     padding: 30px;
-    font-weight: bold;
+    font-weight: 700;
     box-shadow: 5px 10px 20px #000;
-  }
+    background: rgba(5, 21, 170, 0.41);
+    font-family: 'Alkatra', cursive;
   
+  }
+
+  .body {
+    margin:0;
+	padding:10px;
+	min-height: 100vh;
+	font-family: 'Jost', sans-serif;
+  /* background-image: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%); */
+  background: url("https://img.freepik.com/premium-vector/budget-financial-analyst-managing-planning-spending-money-checklist-clipboard-calculator-calendar-background-vector-illustration_2175-1879.jpg?w=900") no-repeat;
+    background-size: cover;
+  }  
   .type,
   .amount,
   .description {
@@ -47,7 +59,7 @@
 
   
   .items {
-    background-color: #C8DBBE;
+    background-color: rgba(24, 24, 24, 0.784);
     width: 700px;
     margin: auto;
     border-radius: 12px;
@@ -67,5 +79,6 @@
     flex-basis: 27%;
     font-size: 18px;
     font-weight: bold;
+    color: #fff;
   }
   

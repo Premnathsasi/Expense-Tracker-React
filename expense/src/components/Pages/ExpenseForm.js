@@ -1,12 +1,15 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import ExpenseItem from "./ExpenseItem";
 import { useNavigate } from "react-router-dom";
 import classes from "./ExpenseForm.module.css";
+import { useSelector, useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
+import { expenseActions } from "../Store/ExpenseSlice";
 
 const ExpenseForm = () => {
   const Navigate = useNavigate();
-  const [expenseList, setExpenseList] = useState([]);
+  const dispatch = useDispatch();
+  const expenseList = useSelector(state => state.expense.expense);
 
   const amountRef = useRef();
   const typeRef = useRef();
@@ -39,9 +42,10 @@ const ExpenseForm = () => {
       const data = await response.json();
       if (response.ok) {
         console.log("Added successfully");
-        setExpenseList((prev) => [...prev, {id:data.name, ...updatedList}]);
+        updatedList =  { id: data.name, ...updatedList }
+        dispatch(expenseActions.addExpense([updatedList]))
         amountRef.current.value = "";
-        typeRef.current.value= "";
+        typeRef.current.value = "";
         descriptionRef.current.value = "";
       } else {
         let errMsg = "Adding Expenses Failed";
@@ -66,85 +70,89 @@ const ExpenseForm = () => {
 
         const newList = [];
         for (const key in data) {
-          newList.push({id: key,...data[key]});
+          newList.push({ id: key, ...data[key] });
         }
-        setExpenseList(newList);
-        console.log(newList)
+        dispatch(expenseActions.removeExpense(newList))
+        console.log(newList);
       } catch (err) {
         console.log(err.message);
       }
     };
     getList();
-  }, [cleanEmail]);
+  }, [cleanEmail, dispatch]);
 
-  const edit = (item) => {
-    setExpenseList((preState) => {
-      const updatedItemList = preState.filter((data) => data.id !== item.id);
-      return updatedItemList;
-    });
-
+  const edit = (item) => {  
     amountRef.current.value = item.amount;
     typeRef.current.value = item.type;
     descriptionRef.current.value = item.description;
+    const updatedItemList = expenseList.filter((data) => data.id !== item.id);
+    dispatch(expenseActions.removeExpense(updatedItemList));
   };
 
-  // deleting the expense
   const deleted = (id) => {
-    setExpenseList((preState) => {
-      const updatedItemList = preState.filter((data) => data.id !== id);
-      return updatedItemList;
-    });
-    };
+      const updatedItemList = expenseList.filter((data) => data.id !== id);
+      dispatch(expenseActions.removeExpense(updatedItemList))
+  };
 
   const goToWelcomeHandler = () => {
     Navigate("/welcome");
   };
-  
 
   const newExpenseList = expenseList.map((item) => (
-    <ExpenseItem item={item} key={item.id } edit={edit} deleted={deleted}/>
+    <ExpenseItem item={item} key={item.id} edit={edit} deleted={deleted} />
   ));
 
   return (
     <React.Fragment>
-      <form className={classes.form} onSubmit={addExpenseHandler}>
-        <div className={classes.type}>
-          <label>Expense Type: </label>
-          <select ref={typeRef}>
-            <option>Food</option>
-            <option>Shopping</option>
-            <option>Entertainment</option>
-            <option>Tour</option>
-            <option>Others</option>
-          </select>
-        </div>
-        <div className={classes.amount}>
-          <label>Expense Amount: </label>
-          <input type="number" min="0" ref={amountRef} />
-        </div>
-        <div className={classes.description}>
-          <label>Expense Description: </label>
-          <textarea type="text" ref={descriptionRef} />
-        </div>
-        <div className={classes.button}>
-          <Button variant="danger" onClick={goToWelcomeHandler}>
-            Close
-          </Button>
-          <Button type="submit" variant="success">
-            Add Expense
-          </Button>
-        </div>
-      </form>
-      {expenseList.length > 0 && (
-        <div className={classes.items}>
-          <div className={classes.title}>
-            <span>Type</span>
-            <span>Amount</span>
-            <span>Description</span>
+      <div className={classes.body}>
+        <form className={classes.form} onSubmit={addExpenseHandler}>
+          <div className={classes.type}>
+            <label>Expense Type: </label>
+            <select className="form-select" ref={typeRef}>
+              <option>Food</option>
+              <option>Shopping</option>
+              <option>Entertainment</option>
+              <option>Tour</option>
+              <option>Others</option>
+            </select>
           </div>
-          {newExpenseList}
-        </div>
-      )}
+          <div className={classes.amount}>
+            <label>Expense Amount: </label>
+            <input
+              type="number"
+              min="0"
+              ref={amountRef}
+              className="form-control"
+            />
+          </div>
+          <div className={classes.description}>
+            <label>Expense Description: </label>
+            <textarea
+              type="text"
+              ref={descriptionRef}
+              className="form-control"
+            />
+          </div>
+          <div className={classes.button}>
+            <Button variant="danger" onClick={goToWelcomeHandler}>
+              Close
+            </Button>
+            <Button type="submit" variant="success">
+              Add Expense
+            </Button>
+          </div>
+        </form>
+        {expenseList.length > 0 && (
+          <div className={classes.items}>
+            <div className={classes.title}>
+              <span>Type</span>
+              <span>Amount</span>
+              <span>Description</span>
+            </div>
+            {newExpenseList}
+          </div>
+        )}
+      </div>
     </React.Fragment>
   );
 };

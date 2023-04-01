@@ -1,14 +1,16 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState} from "react";
 import classes from "./AuthForm.module.css";
 import Spinner from "../UI/Spinner";
+import { useDispatch} from 'react-redux';
 import { useNavigate, NavLink } from "react-router-dom";
-import AuthContext from "../Store/AuthContext";
+import {authActions} from '../Store/AuthSlice'
 
 const AuthForm = () => {
+  const dispatch = useDispatch();
+
   const Navigate = useNavigate();
   const [isLoading, setisLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
-  const authctx = useContext(AuthContext);
 
   const emailInput = useRef();
   const passwordInput = useRef();
@@ -42,8 +44,9 @@ const AuthForm = () => {
           throw new Error(errMsg);
         }
         const data = await response.json();
-        authctx.logIn(data.idToken);
-        localStorage.setItem("email", JSON.stringify(data.email))
+        localStorage.setItem('token', JSON.stringify(data.idToken))
+        localStorage.setItem("email", JSON.stringify(data.email));
+        dispatch(authActions.login())
         Navigate("/welcome");
       } catch (err) {
         alert(err.message);
@@ -108,6 +111,7 @@ const AuthForm = () => {
             required
             ref={emailInput}
             placeholder="Email"
+            className="form-control"
           ></input>
         </div>
         <div className={classes.control}>
@@ -116,6 +120,7 @@ const AuthForm = () => {
             type="password"
             id="password"
             required
+            className="form-control"
             ref={passwordInput}
             placeholder="Password"
           ></input>

@@ -1,6 +1,5 @@
-import React, {useContext, useRef, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../Store/AuthContext";
+import React, { useRef, useEffect} from "react";
+import { json, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faGithub} from "@fortawesome/free-brands-svg-icons"
 import {faGlobe} from '@fortawesome/free-solid-svg-icons';
@@ -9,8 +8,8 @@ import {Button, Container} from "react-bootstrap";
 
 
 const Profile = () => {
+    const token = JSON.parse((localStorage.getItem('token')))
 const Navigate = useNavigate();
-const authCtx = useContext(AuthContext);
 const nameInput = useRef();
 const photoInput = useRef();
 
@@ -19,7 +18,7 @@ useEffect(()=> {
     {
         method: "POST",
         body: JSON.stringify({
-            idToken: authCtx.token
+            idToken:token,
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -41,7 +40,7 @@ const submitHandler= async(e) => {
         {
             method:"POSt",
             body: JSON.stringify({
-                idToken: authCtx.token,
+                idToken: token,
                 displayName:enteredName,
                 photoUrl:enteredPhtoUrl,
                 returnSecureToken:true
@@ -66,9 +65,8 @@ const closeEdit = () => {
 };
     return (
         <React.Fragment>
-            <h4 className="bg-dark text-white p-4">Expense Tracker!!!</h4>
             <Container className="border border-dark p-5">
-            <form className='d-flex justify-content-around  align-items-center' onSubmit={submitHandler}>
+            <form className='d-flex justify-content-around pt-3 align-items-center' onSubmit={submitHandler}>
                 <h3>Contact Details</h3>
                 <div>
                 <FontAwesomeIcon icon={faGithub} className="fa-2x pe-2"/>
