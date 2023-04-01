@@ -7,15 +7,15 @@ import AuthForm from "./components/Auth/AuthForm";
 import ExpenseForm from "./components/Pages/ExpenseForm";
 import Header from "./components/Pages/Header";
 import Welcome from "./components/Pages/Welcome";
-// import AuthContext from "./components/Store/AuthContext";
 import ForgotPasswordPage from "./components/Pages/ForgotPasswordPage";
 
 function App() {
-  // const authCtx = useContext(AuthContext);
-  const auth = useSelector(state => state.auth.isAuthenticated)
+  const auth = useSelector(state => state.auth.isAuthenticated);
+  const theme = useSelector(state => state.theme.theme);
 
   return (
     <React.Fragment>
+      <div className={theme === 'dark' ? 'dark' : ''}>
       <Header />
       <Routes>
         {!auth && <Route path="/" element={<AuthForm />} />}
@@ -25,6 +25,9 @@ function App() {
         <Route path="/forgot" element={<ForgotPasswordPage/>} />
         {!auth ? <Route path='*' element={<Navigate to="/" />}/> : <Route path='*' element={<Navigate to="/welcome" />}/>}
       </Routes>
+      </div>
+      
+      
     </React.Fragment>
   );
 }

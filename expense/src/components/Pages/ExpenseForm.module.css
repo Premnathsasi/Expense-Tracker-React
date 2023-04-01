@@ -4,7 +4,7 @@
     margin: auto;
     box-sizing: border-box;
     border-radius: 20px;
-    margin-top: 70px;
+    margin-top: 40px;
     margin-bottom: 50px;
     padding: 30px;
     font-weight: 700;
@@ -20,7 +20,7 @@
 	min-height: 100vh;
 	font-family: 'Jost', sans-serif;
   /* background-image: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%); */
-  background: url("https://img.freepik.com/premium-vector/budget-financial-analyst-managing-planning-spending-money-checklist-clipboard-calculator-calendar-background-vector-illustration_2175-1879.jpg?w=900") no-repeat;
+  /* background: url("https://img.freepik.com/premium-vector/budget-financial-analyst-managing-planning-spending-money-checklist-clipboard-calculator-calendar-background-vector-illustration_2175-1879.jpg?w=900") no-repeat; */
     background-size: cover;
   }  
   .type,

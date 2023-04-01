@@ -46,6 +46,8 @@ const ForgotPasswordPage = () => {
 
   return (
     <React.Fragment>
+      <div className="bg-white"> 
+        
     <h2 className="text-center bg-success p-3 text-white">Forgot Password</h2>
     <Container className="col-5 mt-5">    
         <form>
@@ -70,6 +72,8 @@ const ForgotPasswordPage = () => {
           </div>
         </form>
       </Container>
+
+      </div>
     </React.Fragment>
   );
 };

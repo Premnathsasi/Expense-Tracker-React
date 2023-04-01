@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../Store/AuthSlice";
 import { Navbar, Nav, Button, Container } from "react-bootstrap";
-import { useSelector } from "react-redux";
 
 const Header = () =>{
     const [emailVerified, setVerified] = useState(false)
@@ -35,9 +34,11 @@ const Header = () =>{
        const verified = data.users[0].emailVerified;
        if (verified === true){
         setVerified(true)
+       } else {
+        console.log('no data found')
        }
       });
-  },[]);
+  },[token]);
 
   const emailVerifyHandler = async () => {
     try {

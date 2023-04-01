@@ -32,7 +32,7 @@ const ExpenseItem = (props) => {
 
         if(res.ok) {
           console.log('deleted successfully');
-          props.deleted(props.item.id)        }
+          props.deleted(props.item)        }
       }
       catch(err) {
         console.log(err.message)
